@@ -16,4 +16,19 @@ class AdminController extends Controller
         echo $req->username."\n";
         return 'index page';
     }
+
+    function getHomePage(){
+        // return view('pages.detail');
+        $idUser = 12;
+        $username = 'admin';
+        $fullname = '<b>Admin A</b>';
+        return view('trangchu',compact('idUser','username','fullname'));
+
+        // $data = [
+        //     'idUser'=>$idUser,
+        //     'username'=>$username,
+        //     'fullname'=>$fullname
+        // ];
+        // return view('trangchu',$data);
+    }
 }

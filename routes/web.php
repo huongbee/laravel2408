@@ -1,8 +1,8 @@
 <?php
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // Route::get('trangchu',function(){
 //     return $_GET['page'];
@@ -75,3 +75,5 @@
 
 
 Route::get('admin/{id}/{username}','AdminController@index')->name('admin.home');
+
+Route::get('trang-chu','AdminController@getHomePage');
