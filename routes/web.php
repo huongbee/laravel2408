@@ -3,6 +3,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('login', function () {
+    return 1234;
+});
 
 // Route::get('trangchu',function(){
 //     return $_GET['page'];
@@ -75,5 +78,14 @@ Route::get('/', function () {
 
 
 Route::get('admin/{id}/{username}','AdminController@index')->name('admin.home');
-
 Route::get('trang-chu','AdminController@getHomePage');
+Route::resource('product', 'HomeController')->names([
+    'create' => 'product.build',
+    'destroy' => 'destroy'
+])->parameters([
+   'product'=>'id' 
+]);
+
+
+Route::get('login','AdminController@getLogin');
+Route::post('login','AdminController@postLogin');

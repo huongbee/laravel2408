@@ -16,13 +16,19 @@
     <p>{!!$fullname!!}</p>
     {{-- 234567 --}}
     {{--  --}}
-    @for($i=1; $i<=10; $i++)
+    {{-- @for($i=1; $i<=10; $i++)
         @if($i%2==0)
             <p>{{$i}}</p>
         @else
             <u>{{$i}}</u>
         @endif
-    @endfor
+    @endfor --}}
+
+
+    <form action="/foo/bar" method="POST">
+        @method('PUT')
+        <input type="text">
+    </form>
 
 </body>
 </html>

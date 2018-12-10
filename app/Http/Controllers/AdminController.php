@@ -31,4 +31,13 @@ class AdminController extends Controller
         // ];
         // return view('trangchu',$data);
     }
+
+    function getLogin(){
+        return view('pages.form');
+    }
+    function postLogin(Request $req){
+        echo $req->username;
+        dd($req);
+        
+    }
 }
