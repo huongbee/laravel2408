@@ -48,17 +48,32 @@ class AdminController extends Controller
     function postUploadFile(Request $req){
         if($req->hasFile('images')){
             $file = $req->file('images');
+            foreach($file as $img){
+                $name = $img->getClientOriginalName();
+                $img->move("avatar",$name);
+            }
+            return redirect()->route('getuploadfile')->with('success','Upload successfuly');
+            
+        }
+        else{
+            return redirect()->route('getuploadfile')->with('error','Please choose file');
+        }
+
+
+        /*
+        if($req->hasFile('images')){
+            $file = $req->file('images');
 
             $name = $file->getClientOriginalName();
             $size = $file->getClientSize(); //$file->getSize();
             $ext = $file->getClientOriginalExtension(); //$file->extension();
             $mimeType = $file->getClientMimeType();
-            /*
+            
                 //C1:
-                $tmpName = $file->path();
-                move_uploaded_file($tmpName,"avatar/$name");
+                // $tmpName = $file->path();
+                // move_uploaded_file($tmpName,"avatar/$name");
                 
-            */
+        
             //C2
             $file->move("avatar",$name);
             echo 'thanhcong';
@@ -73,5 +88,6 @@ class AdminController extends Controller
             //     'error_2'=>'...'
             // ]);
         }
+        */
     }
 }
