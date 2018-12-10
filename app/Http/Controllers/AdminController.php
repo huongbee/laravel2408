@@ -40,4 +40,12 @@ class AdminController extends Controller
         dd($req);
         
     }
+
+    function getUploadFile(){
+        return view('pages.upload');
+    }
+
+    function postUploadFile(){
+        return 1;
+    }
 }
