@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Response;
+use Cookie;
 
 class AdminController extends Controller
 {
@@ -99,5 +101,18 @@ class AdminController extends Controller
         // session()->forget('username');
         return view('pages.get-session');
         
+    }
+    function setCookie(){
+        setcookie('password','12345678',time()+160);
+        //create cookie
+        // $res = new Response;
+        // $res->withCookie('password','12345678',2); // 2minutes
+        // return $res;
+    }
+    function getCookie(Request $request){
+        echo Cookie::get('password');
+        echo  $request->cookie('password');
+        // $this->setCookie();
+        // return view('pages.get-cookie');
     }
 }

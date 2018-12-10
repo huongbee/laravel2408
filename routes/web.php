@@ -95,3 +95,7 @@ Route::post('upload-file','AdminController@postUploadFile')->name('uploadfile');
 
 Route::get('test-session','AdminController@testSession');
 
+Route::get('set-cookie','AdminController@setCookie');
+
+Route::get('test-cookie','AdminController@getCookie');
+
