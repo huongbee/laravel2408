@@ -92,3 +92,6 @@ Route::post('login','AdminController@postLogin');
 
 Route::get('upload','AdminController@getUploadFile')->name('getuploadfile');
 Route::post('upload-file','AdminController@postUploadFile')->name('uploadfile');
+
+Route::get('test-session','AdminController@testSession');
+

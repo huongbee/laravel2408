@@ -90,4 +90,14 @@ class AdminController extends Controller
         }
         */
     }
+    function testSession(Request $req){
+        if(!session()->has('username')){
+            $req->session()->put('username','admin');
+        }
+        dd(session()->all());
+
+        // session()->forget('username');
+        return view('pages.get-session');
+        
+    }
 }
