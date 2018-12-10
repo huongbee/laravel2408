@@ -90,5 +90,5 @@ Route::resource('product', 'HomeController')->names([
 Route::get('login','AdminController@getLogin');
 Route::post('login','AdminController@postLogin');
 
-Route::get('upload','AdminController@getUploadFile');
+Route::get('upload','AdminController@getUploadFile')->name('getuploadfile');
 Route::post('upload-file','AdminController@postUploadFile')->name('uploadfile');

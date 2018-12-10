@@ -7,8 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{route('uploadfile')}}" method="post">
-        {{-- @csrf --}}
+    @if(Session::has('error'))
+        <div>{{Session::get('error')}}</div>
+    @endif
+    @if(session('error'))
+        <div>{{session('error')}}</div>
+    @endif
+
+    <form action="{{route('uploadfile')}}" method="post" enctype="multipart/form-data">
+        @csrf
         <input type="file" name="images">
         <button type="submit">Upload</button>
     </form>

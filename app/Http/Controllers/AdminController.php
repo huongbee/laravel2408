@@ -45,7 +45,17 @@ class AdminController extends Controller
         return view('pages.upload');
     }
 
-    function postUploadFile(){
-        return 1;
+    function postUploadFile(Request $req){
+        if($req->hasFile('images')){
+            $file = $req->file('images');
+            dd($file);
+        }
+        else{
+            return redirect()->route('getuploadfile')->with('error','Please choose file');
+            // return redirect()->route('getuploadfile')->with([
+            //     'error'=>'Please choose file',
+            //     'error_2'=>'...'
+            // ]);
+        }
     }
 }
