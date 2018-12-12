@@ -115,4 +115,14 @@ class AdminController extends Controller
         // $this->setCookie();
         // return view('pages.get-cookie');
     }
+
+    function getHome(){
+        $name = 'Admin';
+        
+        return view('pages.home',compact('name'));
+    }
+    function getType(){
+        return view('pages.type');
+
+    }
 }

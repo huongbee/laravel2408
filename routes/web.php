@@ -77,25 +77,27 @@ Route::get('login', function () {
 // });
 
 
-Route::get('admin/{id}/{username}','AdminController@index')->name('admin.home');
-Route::get('trang-chu','AdminController@getHomePage');
-Route::resource('product', 'HomeController')->names([
-    'create' => 'product.build',
-    'destroy' => 'destroy'
-])->parameters([
-   'product'=>'id' 
-]);
+// Route::get('admin/{id}/{username}','AdminController@index')->name('admin.home');
+// Route::get('trang-chu','AdminController@getHomePage');
+// Route::resource('product', 'HomeController')->names([
+//     'create' => 'product.build',
+//     'destroy' => 'destroy'
+// ])->parameters([
+//    'product'=>'id' 
+// ]);
 
 
-Route::get('login','AdminController@getLogin');
-Route::post('login','AdminController@postLogin');
+// Route::get('login','AdminController@getLogin');
+// Route::post('login','AdminController@postLogin');
 
-Route::get('upload','AdminController@getUploadFile')->name('getuploadfile');
-Route::post('upload-file','AdminController@postUploadFile')->name('uploadfile');
+// Route::get('upload','AdminController@getUploadFile')->name('getuploadfile');
+// Route::post('upload-file','AdminController@postUploadFile')->name('uploadfile');
 
-Route::get('test-session','AdminController@testSession');
+// Route::get('test-session','AdminController@testSession');
 
-Route::get('set-cookie','AdminController@setCookie');
+// Route::get('set-cookie','AdminController@setCookie');
 
-Route::get('test-cookie','AdminController@getCookie');
+// Route::get('test-cookie','AdminController@getCookie');
 
+Route::get('home','AdminController@getHome');
+Route::get('type','AdminController@getType');
