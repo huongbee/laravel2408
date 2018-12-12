@@ -8,18 +8,24 @@
 </head>
 <body style="text-align:center">
     <h2>Sign Up</h2>
-
+    @if($errors->any())
+        @foreach($errors->all() as $err)
+            <li>{{$err}}</li>
+        @endforeach
+    @endif
     <form action="" method="post">
         @csrf
         <input type="email" name="email" placeholder="Email">
         <br><br>
         <input type="text" name="fullname" placeholder="Full name">
         <br><br>
+        <input type="text" name="age" placeholder="Age">
+        <br><br>
         <input type="password" name="password" placeholder="Password">
         <br><br>
         <input type="password" name="confirm_password" placeholder="Confirm password">
         <br><br>
-        <button>Sign Up</button>
+        <button type="submit">Sign Up</button>
     </form>
 </body>
 </html>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Response;
 use Cookie;
+use Validator;
 
 class AdminController extends Controller
 {
@@ -126,5 +127,26 @@ class AdminController extends Controller
     }
     function getForm(){
         return view('pages.validate');
+    }
+    function postForm(Request $req){
+        // $email = $req->email;
+        // $email = $req->input('email','defaul');
+        $rules = [
+            'email'=>'required|email',
+            'fullname'=>'required|string|min:10',
+            'age'=>'required|numeric',
+            'password'=>'required|min:6|max:20',
+            'confirm_password'=>'same:password'
+        ];
+        $message = [
+            'email.required'=>':attribute không được rỗng',
+            'fullname.min' => 'Fullname ít nhất :min kí tự',
+            
+        ];
+        $validator = Validator::make($req->all(),$rules,$message);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator);
+        }
+        else dd($req->all());
     }
 }

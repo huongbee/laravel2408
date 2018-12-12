@@ -102,3 +102,4 @@ Route::get('login', function () {
 Route::get('home','AdminController@getHome');
 Route::get('type','AdminController@getType');
 Route::get('validate','AdminController@getForm');
+Route::post('validate','AdminController@postForm');
