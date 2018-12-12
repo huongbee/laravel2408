@@ -123,6 +123,8 @@ class AdminController extends Controller
     }
     function getType(){
         return view('pages.type');
-
+    }
+    function getForm(){
+        return view('pages.validate');
     }
 }
