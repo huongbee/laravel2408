@@ -131,21 +131,21 @@ class AdminController extends Controller
     function postForm(Request $req){
         // $email = $req->email;
         // $email = $req->input('email','defaul');
+        //https://developer.mozilla.org/vi/docs/Web/JavaScript/Guide/Regular_Expressions
         $rules = [
             'email'=>'required|email',
-            'fullname'=>'required|string|min:10',
+            'fullname'=>'required|string|min:2|not_regex:/\s/',  // ^\s ~ \S
             'age'=>'required|numeric',
-            'password'=>'required|min:6|max:20',
+            'password'=>'required|min:6|max:20|regex:/(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#$%^&])/', // 11KKdd@@@
             'confirm_password'=>'same:password'
         ];
         $message = [
             'email.required'=>':attribute không được rỗng',
             'fullname.min' => 'Fullname ít nhất :min kí tự',
-            
         ];
-        $validator = Validator::make($req->all(),$rules,$message);
+        $validator = \Illuminate\Support\Facades\Validator::make($req->all(),$rules,$message);
         if($validator->fails()){
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->withInput($req->all());
         }
         else dd($req->all());
     }

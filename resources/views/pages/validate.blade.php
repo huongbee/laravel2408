@@ -15,11 +15,24 @@
     @endif
     <form action="" method="post">
         @csrf
-        <input type="email" name="email" placeholder="Email">
+        <input type="email" name="email" placeholder="Email" value="{{old('email')}}">
+        @if($errors->has('email'))
+            {{-- <li>{{$errors->first('email')}}</li> --}}
+            @foreach($errors->get('email') as $err)
+                <li>{{$err}}</li>
+            @endforeach
+        @endif
         <br><br>
-        <input type="text" name="fullname" placeholder="Full name">
+        <input type="text" name="fullname" placeholder="Full name" 
+            value="{{old('fullname')}}">
+        @if($errors->has('fullname'))
+            {{-- <li>{{$errors->first('fullname')}}</li> --}}
+            @foreach($errors->get('fullname') as $err)
+                <li>{{$err}}</li>
+            @endforeach
+        @endif
         <br><br>
-        <input type="text" name="age" placeholder="Age">
+        <input type="text" name="age" placeholder="Age" value="{{old('age')}}">
         <br><br>
         <input type="password" name="password" placeholder="Password">
         <br><br>
