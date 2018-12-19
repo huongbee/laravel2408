@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Response;
 use Cookie;
 use Validator;
+use DB;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -148,5 +150,129 @@ class AdminController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($req->all());
         }
         else dd($req->all());
+    }
+
+    function queryBuilder(){
+        //select
+        //C1
+        // $data = DB::select('SELECT * FROM users');
+        // foreach($data as $user){
+        //     echo $user->name."\n";
+        // }
+
+        //C2
+        // $data = DB::table('users')->get();
+        // foreach($data as $user){
+        //     echo $user->name."\n";
+        // }
+
+        //insert
+        // $user = DB::table('users')->insert([
+        //     'name'=>'Admin 5',
+        //     'email'=>'admin5@gmail.com',
+        //     'password'=>Hash::make('123456')
+        // ]);
+        // dd($user);
+        // $user = DB::table('users')->where([
+        //     'email'=>'admin5@gmail.com'
+        // ])->first();
+        // if($user){
+        //     $checkPassword = Hash::check('123456',$user->password);
+        //     if($checkPassword){
+
+        //         echo 'login success';
+        //     }
+        //     else{
+        //         echo 'Password invalid!';
+        //     }
+        // }   
+        // else{
+        //     echo 'Can not find user';
+        // }
+
+
+        // $user = DB::table('users')->where([
+        //     ['id','=',5],
+        //     ['email','=','....']
+        // ])->first();
+
+        // $user = DB::table('users')->where([
+        //     ['id','=',5]
+        // ])->where('email','=','...')
+        // ->offset(2)->take(5)->get(); //limit 2,5
+
+
+        // $user = DB::table('users')->where([
+        //     ['id','=',5]
+        // ])->orWhere('email','=','...')->orderBy('id','DESC')->limit(10)->get();
+
+        // $user = DB::table('users')->where('id','=',5)->first();
+        // if($user){
+        //     //
+        //     DB::table('users')->where('email','LIKE','%gmail.com')->update([
+        //         'email'=>'...'
+        //     ]);
+        //     $user = DB::update('UPDATE users SET email="admin13@gmail.com" WHERE id = 5');
+        // }   
+
+        // else{
+        //     echo 'Can not find user';
+        // }
+
+        // $email = DB::table('users')->where('id',1)->value('email');
+        // echo $email;    
+
+        // $users = DB::table('users')
+        //         ->where('name','LIKE','%admin%')
+        //         ->where(function($q){
+        //             $q->where('email','admin3@gmail.com');
+        //             $q->orWhere('email','admin4@gmail.com');
+        //         })->select('email','name')->get();
+        // dd($users);
+
+        // $users = DB::table('users')
+        //         ->join('password_resets','password_resets.email','=','users.email')
+        //         ->leftJoin('password_resets','password_resets.email','=','users.email')
+        //         ->select('name','users.email')->get();
+        // $users = DB::table('users as u')
+        //         ->join('password_resets as p',function($q){
+        //             $q->on('p.email','=','u.email');
+        //             // $q->where('id',1);
+        //         })->where('id',1)->get();
+        // dd($users);
+
+        //->groupBy('','')
+
+
+        // Cho biết đơn giá trung bình của các sp hiện có trong cửa hàng
+        // echo DB::table('products')->avg('price');
+        // $data = DB::table('products as p')
+        //         ->select('c.name as tenloai','p.name as tensp')
+        //         ->join('categories as c','c.id','=','p.id_type')
+        //         ->orderBy('c.name','ASC')->get();
+        // foreach($data as $p){
+        //     echo "<li>".$p->tenloai.' - '.$p->tensp."</li>";
+        // }
+
+
+        // $data = DB::table('products as p')
+        //         ->selectRaw('c.name as tenloai , count(p.id) as tongsp')
+        //         ->join('categories as c','c.id','=','p.id_type')
+        //         ->groupBy('c.name')
+        //         ->having('tongsp','>',10)
+        //         ->where('c.name','phụ kiện')
+        //         ->orWhere('c.name','iMac')
+        //         ->orderBy('tongsp','ASC')->get();
+        // dd($data);
+
+        //Cho biết tổng giá tiền và tổng số sản phẩm của sản phẩm có đơn giá trong khoảng 50.000.000đ đến 100.000.000đ theo từng loại sản phẩm.
+        $data = DB::table('products as p')
+            ->selectRaw('c.name as tenloai , count(p.id) as tongsp, sum(p.price) as tongtien')
+            ->join('categories as c','c.id','=','p.id_type')
+            ->groupBy('c.name')
+            ->whereBetween('price',[50000000,100000000])
+            ->get();
+            dd($data);
+
     }
 }
