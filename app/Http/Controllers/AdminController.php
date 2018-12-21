@@ -17,26 +17,45 @@ class AdminController extends Controller
 {
 
     function modelExample(){
+        //SELECT * FROM categories c
+        //INNER JOIN products p
+        // ON....
+        // WHERE c.id=10 
+        // AND p.price = 34790000
+        // $p = Categories::find(10)->product()->where('price',34790000)->get();
 
-        $c = Categories::with('product','product.pageUrl','pageUrlCate')
-            ->whereIn('id',[5,10])->get();
-        // dd($c);
-        foreach($c as $item){
-            echo "<h3>".$item->name.'-----'.$item->pageUrlCate->url."</h3>";
-            foreach($item->product as $p){
-                echo '<li>'.$p->name.'----'.$p->pageUrl->url.'</li>';
-            }
+        
+        $p = Products::find(10)->categories()->where('name','Iphone X')->get();
+
+        dd($p);
+
+
+
+        // $p = Products::with('categories')->whereIn('id',[5,11,2,3,6,7,8,10])->get();
+        // foreach($p as $item){
+        //     echo $item->name.'----'.$item->categories->name;
+        //     echo "\n";
+        // }
+
+        // $c = Categories::with('product','product.pageUrl','pageUrlCate')
+        //     ->whereIn('id',[5,10])->get();
+        // // dd($c);
+        // foreach($c as $item){
+        //     echo "<h3>".$item->name.'-----'.$item->pageUrlCate->url."</h3>";
+        //     foreach($item->product as $p){
+        //         echo '<li>'.$p->name.'----'.$p->pageUrl->url.'</li>';
+        //     }
             
-        }
+        // }
 
 
 
 
-        $p = Products::with('pageUrl')->where('id','<',10)->get();
+        // $p = Products::with('pageUrl')->where('id','<',10)->get();
         // foreach($p as $item){
         //     echo $item->name. '-----'.$item->pageUrl->url."\n";
         // }
-        dd($p);
+        // dd($p);
 
         // $data = Products::selectRaw('c.name as tenloai , count(products.id) as tongsp')
         //         ->join('categories as c','c.id','=','products.id_type')
