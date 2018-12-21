@@ -8,9 +8,73 @@ use Cookie;
 use Validator;
 use DB;
 use Hash;
+use App\Bill;
+use App\Products;
+use App\Categories;
+
 
 class AdminController extends Controller
 {
+
+    function modelExample(){
+
+        $c = Categories::with('product','product.pageUrl','pageUrlCate')
+            ->whereIn('id',[5,10])->get();
+        // dd($c);
+        foreach($c as $item){
+            echo "<h3>".$item->name.'-----'.$item->pageUrlCate->url."</h3>";
+            foreach($item->product as $p){
+                echo '<li>'.$p->name.'----'.$p->pageUrl->url.'</li>';
+            }
+            
+        }
+
+
+
+
+        $p = Products::with('pageUrl')->where('id','<',10)->get();
+        // foreach($p as $item){
+        //     echo $item->name. '-----'.$item->pageUrl->url."\n";
+        // }
+        dd($p);
+
+        // $data = Products::selectRaw('c.name as tenloai , count(products.id) as tongsp')
+        //         ->join('categories as c','c.id','=','products.id_type')
+        //         ->groupBy('c.name')
+        //         ->having('tongsp','>',10)
+        //         ->where('c.name','phụ kiện')
+        //         ->orWhere('c.name','iMac')
+        //         ->orderBy('tongsp','ASC')->get();
+        // dd($data);
+        //insert
+        // $bill = new Bill;
+        // $bill->id_customer = 31;
+        // $bill->date_order = date('Y-m-d H:i:s',time());
+        // $bill->total = 1000000;
+        // $bill->save();
+
+        // $bill = Bill::where('id',29)->first();
+        // if($bill){
+        //     //delete
+        //     // $bill->delete();
+
+        //     //update
+        //     $bill->total = 2000000;
+        //     $bill->save();
+        // }
+        // else{
+        //     echo 'Bill not found!';
+        // }
+        
+
+
+        // $bills = Bill::where('id','>','20')->orderBy('total','DESC')->get();
+        // dd($bills);
+        // foreach($bills as $b){
+        //     echo $b->total."\n";
+        // }
+    }
+
     // function index($idAdmin,$username){
     //     echo $idAdmin."\n";
     //     echo $username."\n";
