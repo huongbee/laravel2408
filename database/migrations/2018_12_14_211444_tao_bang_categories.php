@@ -13,7 +13,11 @@ class TaoBangCategories extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('type',function($t){
+            $t->increments('id');
+            $t->string('name');
+            $t->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class TaoBangCategories extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('type');
     }
 }

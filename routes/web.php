@@ -104,7 +104,19 @@ Route::get('type','AdminController@getType');
 Route::get('validate','AdminController@getForm');
 Route::post('validate','AdminController@postForm');
 
+<<<<<<< HEAD
 Route::get('select-demo','AdminController@queryBuilder');
 
 
 Route::get('model-example','AdminController@modelExample');
+=======
+
+Route::get('clear-cache',function () {
+    return exec('php artisan config:cache');
+});
+
+
+// Route::get('{alias}',function () {
+//     return abort(404);
+// });
+>>>>>>> a2bbd51d4195e0030b53d709f9f02d4c68d6d0c8
