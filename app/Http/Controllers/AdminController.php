@@ -8,15 +8,43 @@ use Cookie;
 use Validator;
 use DB;
 use Hash;
-use App\Bill;
 use App\Products;
 use App\Categories;
+// use App\Bill;
 
 
 class AdminController extends Controller
 {
 
     function modelExample(){
+        //c1
+        $data = \App\Bill::with('product')->limit(3)->get();
+        foreach($data as $b){
+            echo "<h5>BillID: ".$b->id."</h5>";
+            foreach($b->product as $p){
+                echo "<li>".$p->name."</li>";
+            }
+
+        }
+        echo "<hr>";
+        //c2
+        $bill = \App\Bill::with('billDetail.product')->limit(3)->get();
+        foreach($bill as $b){
+            echo "<h5>BillID:".$b->id."</h5>";
+            foreach($b->billDetail as $detail){
+                echo '<li>'.$detail->product->name.'</li>';
+            }            
+        }
+        // dd($bill);
+
+
+
+
+
+        // $data = Products::with('bill')->limit(3)->get();   
+       
+
+
         //SELECT * FROM categories c
         //INNER JOIN products p
         // ON....
@@ -25,9 +53,8 @@ class AdminController extends Controller
         // $p = Categories::find(10)->product()->where('price',34790000)->get();
 
         
-        $p = Products::find(10)->categories()->where('name','Iphone X')->get();
-
-        dd($p);
+        // $p = Products::find(10)->categories()->where('name','Iphone X')->get();
+        // dd($p);
 
 
 

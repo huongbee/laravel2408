@@ -8,4 +8,12 @@ class Bill extends Model
 {
     protected $table = 'bills';
     // public $timestamps = false;
+
+    function product(){
+        return $this->belongsToMany('App\Products','bill_detail','id_bill','id_product');
+    }
+
+    function billDetail(){
+        return $this->hasMany('App\BillDetail','id_bill');
+    }
 }
